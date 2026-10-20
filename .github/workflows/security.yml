@@ -10,12 +10,12 @@ permissions:
 jobs:
   tests:
     name: API tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.9"
           cache: pip
@@ -26,12 +26,12 @@ jobs:
 
   sast:
     name: Bandit SAST
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.9"
           cache: pip
@@ -41,19 +41,19 @@ jobs:
         run: bandit -r app.py models.py -f json -o bandit-report.json
       - name: Upload SAST report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: bandit-report
           path: bandit-report.json
 
   sca:
     name: pip-audit SCA
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.9"
           cache: pip
@@ -63,7 +63,7 @@ jobs:
         run: pip-audit -r requirements.lock --no-deps --disable-pip -s osv --format json --output dependency-report.json
       - name: Upload SCA report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dependency-report
           path: dependency-report.json
