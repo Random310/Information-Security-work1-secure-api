@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+instance/
+.env
+.pytest_cache/
+.coverage
+htmlcov/
+bandit-report.json
+dependency-report.json
+.pip-audit-cache/
